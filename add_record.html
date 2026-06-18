@@ -43,7 +43,7 @@
                 <p> NEW PLAN</p>
                 <h3> Add a new plan (task/event) </h3>
 
-                <form>
+                <form id="record-form" class="record-form">
                     <div class="input-row">
                         <div class="input-group">
                             <label for="title">Title</label> <br>
@@ -57,7 +57,7 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="duration">Duration</label> <br>
-                            <input type="number" min="1" id="duration" name="duration" required>
+                            <input type="number" min="1" id="duration" name="duration" placeholder="Minutes" required>
                         </div>
                         <div class="input-group">
                             <label for="tag">Tag</label> <br>
@@ -70,5 +70,8 @@
             </section>
         </main>
     </div>
+
+<script src="scripts/add_record_simple.js"></script>
+<script src="scripts/dashboard_render.js"></script>
 </body>
 </html>
