@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Tracker</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+
+        <!-- THE LEFT SIDE -->
+        <aside class="sidebar"> 
+            <div class="brand">
+                <span class="brand-mark">C</span>
+                <div>
+                    <p class="eyebrow">Campus Life</p>
+                    <h3>Tracker</h3>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="add_record.html"><i class="fa-solid fa-list-check"></i> Add Record</a></li>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings </a></li>
+                </ul>
+            </nav>  
+            <div class="bottom-of-sidebar">
+                <button class="logout-button"><i class="fa-solid fa-sign-out"> </i>Logout</button>
+            </div>
+        </aside>
+
+        <!-- THE RIGHT SIDE -->
+        <main class="main-content">
+            <!-- The Dashboard title is here -->
+            <header>
+                <h3> Dashboard </h3>
+            </header>
+            <!-- <h1>Welcome to CALI Tracker</h1>
+            <p>Here you can manage your events and tasks efficiently.</p> -->
+            
+            <section class="dashboard-overview">
+                <p> OVERVIEW </p>
+                <h3> Statistics </h3>
+                <article class="statistics-cards">
+                    <div class="stat-card">
+                        <p class="stat-label"> Total plans</p>
+                        <p class="stat-number" id="total-records">0</p>
+                    </div>                    
+                    <div class="stat-card">
+                        <p class="stat-label"> Total Duration</p>
+                        <p class="stat-number" id="total-duration">0 min</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label"> Top Tag plans</p>
+                        <p class="stat-number" id="top-tag">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label"> Recent Items </p>
+                        <p class="stat-number" id="recent-count">0</p>
+                    </div>
+                </article>
+            </section>
+
+            <div class="trend-card">
+                <div class="trend-header">
+                    <div>
+                        <p class="eyebrow">7-day trend</p>
+                        <h3>Due items this week</h3>
+                    </div>
+                </div>
+                <div class="trend-bars" id="trend-bars" aria-hidden="true"></div>
+            </div>
+
+            <section class="plans-table">
+                <p> EVENTS & TASKS</p>
+                <h3> Your Plans </h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Tag</th>
+                            <th>Duration</th>
+                            <th>DueDate</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="plans-table-body">
+                        <tr>
+                            <td> Coding </td>
+                            <td> Python </td>
+                            <td> 60 min </td>
+                            <td> 2023-10-15 </td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Coding </td>
+                            <td> Python </td>
+                            <td> 60 min </td>
+                            <td> 2023-10-15 </td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>
