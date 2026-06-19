@@ -4,6 +4,10 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -505,6 +509,50 @@ a {
     min-height: 18px;
 }
 
+.sort-and-search-controls{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.sort-and-search-controls input {
+    flex: 3;
+    padding: 12px 14px;
+    border: 1px solid #e9e9f0;
+    border-radius: 12px;
+    font: inherit;
+    margin-top: 10px;
+}
+
+.sort-and-search-controls select {
+    flex: 3;
+    padding: 12px 14px;
+    border: 1px solid #e9e9f0;
+    border-radius: 12px;
+    font: inherit;
+    width: 90%;
+    margin-top: 10px;
+}
+
+.sort-and-search-controls button {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid #5f3cff;
+    background: #5f3cff;
+    border-radius: 12px;
+    font: inherit;
+    margin-top: 10px;
+    color: white;
+}
+
+#plan-search {
+    width: 30%;
+}
+
+#sort-key {
+    padding-right: -50px;
+}
 
 @media (max-width: 820px) {
     .plans-table table,

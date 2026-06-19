@@ -77,8 +77,21 @@
                 <p> EVENTS & TASKS</p>
                 <h3> Your Plans </h3>
 
-                <div class="plans-toolbar">
-                <input id="plan-search" type="search" placeholder="Search title, tag, or due date"/>
+                <div class="sort-and-search-controls">
+                    <input id="plan-search" type="search" placeholder="Search title, tag, or due date"/>
+                    
+                    <label id="sort-key" for="plan-sort-key">Sort by</label>
+                    <select id="plan-sort-key">
+                        <option value="dueDate">Due date</option>
+                        <option value="title">Title</option>
+                        <option value="duration">Duration</option>
+                        <option value="tag">Tag</option>
+                    </select>
+
+                    <button id="plan-sort-dir" type="button" data-direction="asc">
+                    Asc
+                    </button>
+                </div>
                 <table>
                     <thead>
                         <tr>
