@@ -9,9 +9,15 @@
 </head>
 <body style="background-color: #f5f6fb;">
     <div class="dashboard">
+        <button type="button" class="sidebar-toggle" aria-label="Open navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
         <!-- THE LEFT SIDE -->
         <aside class="sidebar"> 
+            <button type="button" class="sidebar-close" aria-label="Close navigation menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
             <div class="brand">
                 <span class="brand-mark">C</span>
                 <div>
@@ -30,6 +36,7 @@
                 <button class="logout-button"><i class="fa-solid fa-sign-out"> </i>Logout</button>
             </div>
         </aside>
+        <div class="sidebar-backdrop" aria-hidden="true"></div>
 
         <!-- THE RIGHT SIDE -->
         <main class="main-content">
@@ -77,5 +84,24 @@
 
 <script src="scripts/add_record_simple.js"></script>
 <script src="scripts/dashboard_render.js"></script>
+<script>
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+    const sidebarLinks = document.querySelectorAll('.sidebar nav a');
+
+    function openSidebar() {
+        document.body.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+        document.body.classList.remove('sidebar-open');
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebar));
+</script>
 </body>
 </html>

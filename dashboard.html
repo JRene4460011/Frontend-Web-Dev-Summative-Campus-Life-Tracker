@@ -6,13 +6,19 @@
     <title>Campus Life Tracker</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div class="dashboard">
+        <button type="button" class="sidebar-toggle" aria-label="Open navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
         <!-- THE LEFT SIDE -->
         <aside class="sidebar"> 
+            <button type="button" class="sidebar-close" aria-label="Close navigation menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
             <div class="brand">
                 <span class="brand-mark">C</span>
                 <div>
@@ -31,6 +37,7 @@
                 <button class="logout-button"><i class="fa-solid fa-sign-out"> </i>Logout</button>
             </div>
         </aside>
+        <div class="sidebar-backdrop" aria-hidden="true"></div>
 
         <!-- THE RIGHT SIDE -->
         <main class="main-content">
@@ -93,22 +100,24 @@
                     Asc
                     </button>
                 </div>
-                
+
                 <div class="plans-toolbar">
                     <button id="export-json" type="button">Export JSON</button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Tag</th>
-                            <th>Duration</th>
-                            <th>DueDate</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="plans-table-body"></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Tag</th>
+                                <th>Duration</th>
+                                <th>DueDate</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plans-table-body"></tbody>
+                    </table>
+                </div>
             </section>
 
         </main>
@@ -130,6 +139,24 @@
 
         link.click();
     });
+
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+    const sidebarLinks = document.querySelectorAll('.sidebar nav a');
+
+    function openSidebar() {
+        document.body.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+        document.body.classList.remove('sidebar-open');
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebar));
 </script>
 </body>
 </html>

@@ -9,11 +9,11 @@ function renderPlans() {
         const row = document.createElement("tr");
 
         row.innerHTML = `
-            <td>${plan.title}</td>
-            <td>${plan.tag}</td>
-            <td>${plan.duration} min</td>
-            <td>${plan.dueDate}</td>
-            <td>
+            <td data-label="Title">${plan.title}</td>
+            <td data-label="Tag">${plan.tag}</td>
+            <td data-label="Duration">${plan.duration} min</td>
+            <td data-label="Due Date">${plan.dueDate}</td>
+            <td data-label="Actions">
                 <button class="btn btn-primary">Edit</button>
                 <button class="btn btn-danger" onclick="deletePlan(${index})">
                     Delete
@@ -31,10 +31,7 @@ renderPlans();
 function deletePlan(index) {
     plans.splice(index, 1);
 
-    localStorage.setItem(
-        "plans",
-        JSON.stringify(plans)
-    );
+    localStorage.setItem("plans", JSON.stringify(plans));
 
     renderPlans();
 }

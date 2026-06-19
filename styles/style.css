@@ -36,6 +36,105 @@ a {
     width: 300px;
     height: 100vh;
     border-right: 2px solid lightgrey;
+    transform: translateX(0);
+    transition: transform 0.25s ease;
+    z-index: 105;
+}
+
+.sidebar-toggle,
+.sidebar-close {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #4f46e5;
+    cursor: pointer;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: #5f3cff;
+    color: white;
+    display: grid;
+    place-items: center;
+    z-index: 110;
+}
+
+.sidebar-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #eef2ff;
+    display: grid;
+    place-items: center;
+    z-index: 106;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 100;
+}
+
+.sidebar-open .sidebar-backdrop {
+    display: block;
+    opacity: 1;
+}
+
+.sidebar-open .dashboard .sidebar {
+    transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar-toggle {
+        display: grid;
+    }
+
+    .sidebar-close {
+        display: grid;
+    }
+
+    .sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-open .sidebar-backdrop {
+        display: block;
+        opacity: 1;
+    }
+
+    .dashboard .main-content {
+        margin-left: 0;
+        padding: 88px 18px 40px;
+    }
+
+    .main-content header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 18px 18px;
+        border-bottom: 1px solid lightgrey;
+        z-index: 101;
+    }
 }
 
 .brand {
@@ -564,42 +663,100 @@ a {
     color: white;
 }
 
-@media (max-width: 820px) {
-    .plans-table table,
-    .plans-table table thead,
-    .plans-table table tbody,
-    .plans-table table th,
-    .plans-table table td,
-    .plans-table table tr {
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table-responsive table {
+        min-width: 700px;
+    }
+
+    .table-responsive table th,
+    .table-responsive table td {
+        white-space: nowrap;
+    }
+
+    .sidebar-toggle {
+        display: grid;
+    }
+
+    .dashboard .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar-close {
+        display: grid;
+    }
+
+    .sidebar .bottom-of-sidebar {
+        position: static;
+        margin-bottom: 20px;
+    }
+
+    .dashboard .main-content {
+        margin-left: 0;
+        padding: 88px 18px 40px;
+    }
+
+    .main-content header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 18px 18px;
+        border-bottom: 1px solid lightgrey;
+        z-index: 101;
+    }
+
+    .sidebar nav ul li {
+        justify-content: flex-start;
+    }
+
+    .sort-and-search-controls{
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 14px;
+    }
+
+    .sort-and-search-controls input,
+    .sort-and-search-controls select,
+    .sort-and-search-controls button {
+        width: 100%;
+    }
+
+    .sidebar-open .dashboard .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-open .sidebar-backdrop {
         display: block;
-    }
-
-    .plans-table table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    .plans-table table tbody tr {
-        margin-bottom: 16px;
-        border-radius: 18px;
-        box-shadow: 0 12px 30px rgba(111, 111, 134, 0.08);
-        overflow: hidden;
-    }
-
-    .plans-table table td {
-        border: none;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 14px 18px;
-    }
-
-    .plans-table table td::before {
-        content: attr(data-label);
-        font-weight: 700;
-        color: #6f6f86;
-        margin-right: 10px;
-        flex: 1 0 40%;
+        opacity: 1;
     }
 }
