@@ -129,6 +129,23 @@
 
 <script src="scripts/dashboard_render.js"></script>
 <script>
+    // Exporting table data in JSON format/file.
+    document.getElementById("export-json").addEventListener("click", function () {
+
+        const file = new Blob(
+            [localStorage.getItem("plans") || "[]"],
+            { type: "application/json" }
+        );
+
+        const link = document.createElement("a");
+
+        link.href = URL.createObjectURL(file);
+        link.download = "plans-export.json";
+
+        link.click();
+    });
+
+
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebarClose = document.querySelector('.sidebar-close');
     const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
