@@ -59,7 +59,6 @@ a {
     border-radius: 14px;
     background: #5f3cff;
     color: white;
-    display: grid;
     place-items: center;
     z-index: 110;
 }
@@ -72,7 +71,6 @@ a {
     height: 38px;
     border-radius: 10px;
     background: #eef2ff;
-    display: grid;
     place-items: center;
     z-index: 106;
     pointer-events: auto;
