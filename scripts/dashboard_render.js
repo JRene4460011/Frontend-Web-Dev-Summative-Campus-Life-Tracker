@@ -209,3 +209,7 @@ sortButton.addEventListener("click", function () {
 
     sortPlans();
 });
+
+
+
+// Exporting the JSON data

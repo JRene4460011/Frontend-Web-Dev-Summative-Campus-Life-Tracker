@@ -554,6 +554,16 @@ a {
     padding-right: -50px;
 }
 
+.plans-toolbar button {
+    padding: 12px 14px;
+    border: 1px solid #5f3cff;
+    background: #5f3cff;
+    border-radius: 12px;
+    font: inherit;
+    margin-top: 20px;
+    color: white;
+}
+
 @media (max-width: 820px) {
     .plans-table table,
     .plans-table table thead,

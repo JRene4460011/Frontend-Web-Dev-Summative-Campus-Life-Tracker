@@ -93,6 +93,10 @@
                     Asc
                     </button>
                 </div>
+                
+                <div class="plans-toolbar">
+                    <button id="export-json" type="button">Export JSON</button>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -110,5 +114,22 @@
         </main>
     </div>
 <script src="scripts/dashboard_render.js"></script>
+<script>
+// Export JSON data
+    document.getElementById("export-json").addEventListener("click", function () {
+
+        const file = new Blob(
+            [localStorage.getItem("plans") || "[]"],
+            { type: "application/json" }
+        );
+
+        const link = document.createElement("a");
+
+        link.href = URL.createObjectURL(file);
+        link.download = "plans-export.json";
+
+        link.click();
+    });
+</script>
 </body>
 </html>
