@@ -17,25 +17,33 @@ form.addEventListener("submit", function (event) {
 
     // TITLE
     if (!titleRegex.test(title)) {
-        alert("Title should contain at least 3 letters, numbers, or spaces.");
+        // Since this isn't professional, I WILL display errors on beneath input fields.
+        // alert("Title should contain at least 3 letters, numbers, or spaces.");
+        document.getElementById("title-error").textContent = "Title should contain at least 3 letters, numbers, or spaces.";
         return;
     }
 
     // DUE DATE
     if (!dueDateRegex.test(dueDate)) {
-        alert("Due date must be in YYYY-MM-DD format.");
+        // Since this isn't professional, I WILL display errors on beneath input fields.
+        // alert("Due date must be in YYYY-MM-DD format.");
+        document.getElementById("duedate-error").textContent = "Due date must be in YYYY-MM-DD format.";
         return;
     }
 
     // DURATION
     if (!durationRegex.test(duration)) {
-        alert("Duration must be a positive whole number.");
+        // Since this isn't professional, I WILL display errors on beneath input fields.
+        // alert("Duration must be a positive whole number.");
+        document.getElementById("duration-error").textContent = "Duration must be a positive whole number.";
         return;
     }
 
     // TAG
     if (!tagRegex.test(tag)) {
-        alert("Tag must contain only letters and spaces.");
+        // Since this isn't professional, I WILL display errors on beneath input fields.
+        // alert("Tag must contain only letters and spaces.");
+        document.getElementById("tag-error").textContent = "Tag must contain only letters and spaces.";
         return;
     }
 

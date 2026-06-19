@@ -47,21 +47,25 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label for="title">Title</label> <br>
-                            <input type="text" id="title" name="title" required>
+                            <input type="text" id="title" name="title" required> <br>
+                            <small class="error" id="title-error"></small>
                         </div>
                         <div class="input-group">
                             <label for="duedate">Due Date</label> <br>
-                            <input type="date" id="duedate" name="duedate" required>
+                            <input type="date" id="duedate" name="duedate" required> <br>
+                            <small class="error" id="duedate-error"></small>
                         </div>
                     </div>
                     <div class="input-row">
                         <div class="input-group">
                             <label for="duration">Duration</label> <br>
-                            <input type="number" min="1" id="duration" name="duration" placeholder="Minutes" required>
+                            <input type="number" min="1" id="duration" name="duration" placeholder="Minutes" required> <br>
+                            <small class="error" id="duration-error"></small>
                         </div>
                         <div class="input-group">
                             <label for="tag">Tag</label> <br>
-                            <input type="text" id="tag" name="tag" required>
+                            <input type="text" id="tag" name="tag" required> <br>
+                            <small class="error" id="tag-error"></small>
                         </div>
                     </div>
                     <button type="submit">Add Plan</button>
