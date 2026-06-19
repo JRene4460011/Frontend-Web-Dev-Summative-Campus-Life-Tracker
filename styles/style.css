@@ -247,22 +247,23 @@ a {
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     align-items: end;
-    min-height: 120px;
+    min-height: 90px;
 }
 
 .trend-bar {
     width: 100%;
-    border-radius: 14px;
+    border-radius: 10px;
     background: #dfe4ff;
     position: relative;
-    height: calc(var(--bar-value, 0) * 18px);
+    /* use pixel height provided by JS (0-50px) */
+    height: var(--bar-px, 0px);
     transition: height 0.25s ease;
 }
 
 .trend-bar::after {
     content: attr(data-value);
     position: absolute;
-    top: -22px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.75rem;
@@ -273,7 +274,7 @@ a {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .trend-labels span {
