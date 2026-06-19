@@ -115,3 +115,97 @@ function renderTrend() {
 renderTrend();
 
 
+// Using jQuery to search in the dashboard table.
+// $("#plan-search").on("keyup", function () {
+
+//     const value =
+//         $(this).val().toLowerCase();
+
+//     $("#plans-table-body tr").filter(function () {
+
+//         $(this).toggle(
+//             $(this).text().toLowerCase().indexOf(value) > -1
+//         );
+
+//     });
+
+// });
+
+// Replacing jQuery with Regex.
+$("#plan-search").on("keyup", function () {
+
+    try {
+
+        const regex = new RegExp(
+            $(this).val(),
+            "i"
+        );
+
+        $("#plans-table-body tr").each(function () {
+
+            $(this).toggle(
+                regex.test($(this).text())
+            );
+
+        });
+
+    } catch {
+
+        $("#plans-table-body tr").show();
+
+    }
+
+});
+
+// Sorting basing on the due date, title, duration, and tag.
+const sortSelect = document.getElementById("plan-sort-key");
+const sortButton = document.getElementById("plan-sort-dir");
+let sortDirection = "asc";
+
+function sortPlans() {
+
+    const sortBy = sortSelect.value;
+
+    plans.sort((a, b) => {
+
+        if (sortBy === "duration") {
+            return sortDirection === "asc" ? a.duration - b.duration : b.duration - a.duration;
+        }
+
+        if (sortBy === "dueDate") {
+            return sortDirection === "asc" ? new Date(a.dueDate) - new Date(b.dueDate) : new Date(b.dueDate) - new Date(a.dueDate);
+        }
+
+        if (sortDirection === "asc") {
+            return a[sortBy].localeCompare(b[sortBy]);
+        }
+
+        return b[sortBy].localeCompare(a[sortBy]);
+
+    });
+
+    renderPlans();
+}
+
+// This is for when the dropdown changes.
+sortSelect.addEventListener("change", function () {
+    sortPlans();
+});
+
+// When the ASC/DESC button gets clicked, the sorting direction should also get changed..
+sortButton.addEventListener("click", function () {
+
+    if (sortDirection === "asc") {
+
+        sortDirection = "desc";
+        sortButton.textContent = "Desc";
+
+    } else {
+
+        sortDirection = "asc";
+        sortButton.textContent = "Asc";
+
+    }
+
+    sortPlans();
+});
