@@ -121,5 +121,25 @@
 
         </main>
     </div>
+
+<script>
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+    const sidebarLinks = document.querySelectorAll('.sidebar nav a');
+
+    function openSidebar() {
+        document.body.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+        document.body.classList.remove('sidebar-open');
+    }
+
+    sidebarToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebar));
+</script>
 </body>
 </html>
