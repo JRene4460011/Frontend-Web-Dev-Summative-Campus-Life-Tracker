@@ -60,6 +60,14 @@ const totalDuration = plans.reduce((sum, plan) => sum + Number(plan.duration), 0
 
 document.getElementById("total-duration").textContent = `${totalDuration} min`;
 
+// Calculating the remaining time: weekly cap - totla duration.
+const settings = JSON.parse(localStorage.getItem("settings")) || {};
+const weeklyCap = Number(settings.weeklyCap) || 0;
+const remaining = weeklyCap - totalDuration;
+
+document.getElementById("remaining-cap").textContent =
+    `${remaining >= 0 ? remaining : 0} min`;
+    
 // Using the map and sort methods to find most used tags.
 const tags = plans.map(plan => plan.tag);
 
@@ -240,5 +248,3 @@ sortButton.addEventListener("click", function () {
 });
 
 
-
-// Exporting the JSON data
