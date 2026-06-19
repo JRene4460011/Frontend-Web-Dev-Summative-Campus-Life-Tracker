@@ -55,7 +55,7 @@
                         <div class="input-group">
                             <label for="title">Title</label> <br>
                             <input type="text" id="title" name="title" required> <br>
-                            <small class="error" id="title-error"></small>
+                            <small class="error" id="title-error" role="status" aria-live="polite"></small>
                         </div>
                         <div class="input-group">
                             <label for="duedate">Due Date</label> <br>
@@ -82,6 +82,7 @@
         </main>
     </div>
 
+<script src="scripts/add_record_simple.js"></script>
 <script>
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebarClose = document.querySelector('.sidebar-close');

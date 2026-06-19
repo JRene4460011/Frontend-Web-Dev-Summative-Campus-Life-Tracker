@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Planner - Regex Validation Tests</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+            background: #f5f6fb;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #23232f;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .test-group {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            padding: 20px;
+            border: 1px solid rgba(111, 111, 134, 0.14);
+            box-shadow: 0 2px 8px rgba(112, 72, 251, 0.05);
+        }
+
+        .test-group h2 {
+            color: #5f3cff;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #5f3cff;
+            padding-bottom: 10px;
+        }
+
+        .regex-display {
+            background: #fbfbff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            font-family: 'Courier New', monospace;
+            color: #5f5cff;
+            font-size: 0.9rem;
+            border-left: 4px solid #5f3cff;
+        }
+
+        .test-case {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border: 1px solid #e9e9f0;
+        }
+
+        .test-case.pass {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .test-case.fail {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .test-icon {
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .test-case.pass .test-icon {
+            color: #28a745;
+        }
+
+        .test-case.fail .test-icon {
+            color: #dc3545;
+        }
+
+        .test-content {
+            flex: 1;
+        }
+
+        .test-input {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #23232f;
+            margin-bottom: 4px;
+        }
+
+        .test-label {
+            font-size: 0.85rem;
+            color: #6f6f86;
+        }
+
+        .summary {
+            background: #fbfbff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #5f3cff;
+            margin-top: 30px;
+        }
+
+        .summary h3 {
+            color: #5f3cff;
+            margin-bottom: 12px;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9e9f0;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #5f3cff;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6f6f86;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Campus Life Planner - Regex Validation Tests</h1>
+        <div id="test-results"></div>
+        <div class="summary">
+            <h3>Test Summary</h3>
+            <div class="summary-stats">
+                <div class="stat">
+                    <div class="stat-number" id="total">0</div>
+                    <div class="stat-label">Total Tests</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="passed">0</div>
+                    <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="failed">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="percentage">0%</div>
+                    <div class="stat-label">Pass Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Regex patterns from add_record_simple.js
+        const titleRegex = /^\S(?:.*\S)?$/;
+        const dueDateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+        const durationRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+        const tagRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+
+        // Test suites
+        const testSuites = [
+            {
+                name: "Title Validation",
+                regex: titleRegex,
+                regexStr: `/^\\S(?:.*\\S)?$/`,
+                description: "No leading/trailing spaces, handles single words",
+                tests: [
+                    { input: "Learn Git", expected: true, label: "Valid: normal text" },
+                    { input: "Study", expected: true, label: "Valid: single word" },
+                    { input: "Learn Git Advanced", expected: true, label: "Valid: multiple words" },
+                    { input: " Learn Git", expected: false, label: "Invalid: leading space" },
+                    { input: "Learn Git ", expected: false, label: "Invalid: trailing space" },
+                    { input: " Learn Git ", expected: false, label: "Invalid: both spaces" },
+                    { input: "Learn  Git", expected: true, label: "Valid: double space in middle" },
+                    { input: "", expected: false, label: "Invalid: empty string" },
+                    { input: " ", expected: false, label: "Invalid: space only" },
+                ]
+            },
+            {
+                name: "Due Date Validation",
+                regex: dueDateRegex,
+                regexStr: `/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$/`,
+                description: "YYYY-MM-DD format with valid month (01-12) and day (01-31)",
+                tests: [
+                    { input: "2026-06-19", expected: true, label: "Valid: current date" },
+                    { input: "2025-12-31", expected: true, label: "Valid: year end" },
+                    { input: "2024-01-01", expected: true, label: "Valid: year start" },
+                    { input: "2026-02-28", expected: true, label: "Valid: February" },
+                    { input: "2026-13-19", expected: false, label: "Invalid: month 13" },
+                    { input: "2026-00-19", expected: false, label: "Invalid: month 00" },
+                    { input: "2026-06-32", expected: false, label: "Invalid: day 32" },
+                    { input: "2026-06-00", expected: false, label: "Invalid: day 00" },
+                    { input: "06-19-2026", expected: false, label: "Invalid: wrong format" },
+                    { input: "2026/06/19", expected: false, label: "Invalid: wrong separator" },
+                ]
+            },
+            {
+                name: "Duration Validation",
+                regex: durationRegex,
+                regexStr: `/^(0|[1-9]\\d*)(\\.\\d{1,2})?$/`,
+                description: "Positive integer or decimal (0-2 decimal places)",
+                tests: [
+                    { input: "30", expected: true, label: "Valid: whole number" },
+                    { input: "0", expected: true, label: "Valid: zero" },
+                    { input: "120", expected: true, label: "Valid: large number" },
+                    { input: "30.5", expected: true, label: "Valid: one decimal" },
+                    { input: "45.25", expected: true, label: "Valid: two decimals" },
+                    { input: "30.0", expected: true, label: "Valid: decimal zero" },
+                    { input: "-30", expected: false, label: "Invalid: negative" },
+                    { input: "30.555", expected: false, label: "Invalid: three decimals" },
+                    { input: "abc", expected: false, label: "Invalid: text" },
+                    { input: "", expected: false, label: "Invalid: empty" },
+                ]
+            },
+            {
+                name: "Tag Validation",
+                regex: tagRegex,
+                regexStr: `/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/`,
+                description: "Letters only, separated by spaces or hyphens",
+                tests: [
+                    { input: "Music", expected: true, label: "Valid: single word" },
+                    { input: "Study Music", expected: true, label: "Valid: space separated" },
+                    { input: "Study-Music", expected: true, label: "Valid: hyphen separated" },
+                    { input: "Study-Work-Time", expected: true, label: "Valid: multiple hyphens" },
+                    { input: "Study Work Music", expected: true, label: "Valid: multiple spaces" },
+                    { input: "Music123", expected: false, label: "Invalid: with numbers" },
+                    { input: "Music!", expected: false, label: "Invalid: with special char" },
+                    { input: "Study  Music", expected: false, label: "Invalid: double space" },
+                    { input: "Study-", expected: false, label: "Invalid: trailing hyphen" },
+                    { input: "-Study", expected: false, label: "Invalid: leading hyphen" },
+                ]
+            }
+        ];
+
+        // Render tests
+        const resultsContainer = document.getElementById("test-results");
+        let totalTests = 0;
+        let passedTests = 0;
+        let failedTests = 0;
+
+        testSuites.forEach(suite => {
+            const groupDiv = document.createElement("div");
+            groupDiv.className = "test-group";
+
+            const titleDiv = document.createElement("h2");
+            titleDiv.textContent = suite.name;
+            groupDiv.appendChild(titleDiv);
+
+            const regexDiv = document.createElement("div");
+            regexDiv.className = "regex-display";
+            regexDiv.textContent = suite.regexStr;
+            groupDiv.appendChild(regexDiv);
+
+            suite.tests.forEach(test => {
+                const result = suite.regex.test(test.input);
+                const passed = result === test.expected;
+                totalTests++;
+                if (passed) passedTests++;
+                else failedTests++;
+
+                const testDiv = document.createElement("div");
+                testDiv.className = `test-case ${passed ? "pass" : "fail"}`;
+
+                const icon = document.createElement("div");
+                icon.className = "test-icon";
+                icon.textContent = passed ? "✓" : "✗";
+
+                const content = document.createElement("div");
+                content.className = "test-content";
+
+                const input = document.createElement("div");
+                input.className = "test-input";
+                input.textContent = `"${test.input}"`;
+
+                const label = document.createElement("div");
+                label.className = "test-label";
+                label.textContent = test.label;
+
+                content.appendChild(input);
+                content.appendChild(label);
+
+                testDiv.appendChild(icon);
+                testDiv.appendChild(content);
+                groupDiv.appendChild(testDiv);
+            });
+
+            resultsContainer.appendChild(groupDiv);
+        });
+
+        // Update summary
+        document.getElementById("total").textContent = totalTests;
+        document.getElementById("passed").textContent = passedTests;
+        document.getElementById("failed").textContent = failedTests;
+        document.getElementById("percentage").textContent = 
+            Math.round((passedTests / totalTests) * 100) + "%";
+    </script>
+</body>
+</html>
