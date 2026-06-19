@@ -27,7 +27,7 @@ function renderPlans() {
             <td data-label="Duration">${highlightMatches(plan.duration)} min</td>
             <td data-label="Due Date">${highlightMatches(plan.dueDate)}</td>
             <td data-label="Actions">
-                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-primary" onclick="editPlan(${index})">Edit</button>
                 <button class="btn btn-danger" onclick="deletePlan(${index})">
                     Delete
                 </button>
@@ -51,6 +51,14 @@ function deletePlan(index) {
     localStorage.setItem("plans", JSON.stringify(plans));
 
     renderPlans();
+}
+
+function editPlan(index) {
+    const plan = plans[index];
+    if (!plan) return;
+
+    localStorage.setItem("currentEdit", JSON.stringify({ index, ...plan }));
+    window.location.href = "add_record.html";
 }
 
 // Using ID to display contents on the Stats boxes

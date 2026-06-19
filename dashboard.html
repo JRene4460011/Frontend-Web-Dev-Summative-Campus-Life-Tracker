@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <body>
     <div class="dashboard">
         <button type="button" class="sidebar-toggle" aria-label="Open navigation menu">
@@ -40,7 +41,7 @@
         <div class="sidebar-backdrop" aria-hidden="true"></div>
 
         <!-- THE RIGHT SIDE -->
-        <main class="main-content">
+        <main id="main-content" class="main-content">
             <!-- The Dashboard title is here -->
             <header>
                 <h3> Dashboard </h3>
@@ -90,8 +91,9 @@
                 <h3> Your Plans </h3>
 
                 <div class="sort-and-search-controls">
-                    <input id="plan-search" type="search" placeholder="Search title, tag, or due date"/>
-                    
+                    <label for="plan-search" class="sr-only">Search plans</label>
+                    <input id="plan-search" type="search" placeholder="Search title, tag, or due date" aria-label="Search plans"/>
+
                     <label id="sort-key" for="plan-sort-key">Sort by</label>
                     <select id="plan-sort-key">
                         <option value="dueDate">Due date</option>
@@ -163,6 +165,12 @@
     sidebarClose.addEventListener('click', closeSidebar);
     sidebarBackdrop.addEventListener('click', closeSidebar);
     sidebarLinks.forEach(link => link.addEventListener('click', closeSidebar));
+
+    document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.body.classList.remove('sidebar-open');
+    }
+    });
 </script>
 </body>
 </html>

@@ -1,6 +1,17 @@
 const form = document.getElementById("record-form");
 const createId = () => `rec_${Date.now()}`;
 
+// Load saved information, so they can be editted.
+const editData = JSON.parse(localStorage.getItem("currentEdit")) || null;
+
+if (editData) {
+    document.getElementById("title").value = editData.title;
+    document.getElementById("duedate").value = editData.dueDate;
+    document.getElementById("duration").value = editData.duration;
+    document.getElementById("tag").value = editData.tag;
+    document.querySelector("button[type='submit']").textContent = "Save changes";
+}
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -52,14 +63,19 @@ form.addEventListener("submit", function (event) {
     const existingPlans =
         JSON.parse(localStorage.getItem("plans")) || [];
 
-    existingPlans.push(plan);
+    if (editData && Number.isInteger(editData.index)) {
+        existingPlans[editData.index] = plan;
+        localStorage.removeItem("currentEdit");
+        alert("Plan updated successfully!");
+    } else {
+        existingPlans.push(plan);
+        alert("Plan saved successfully!");
+    }
 
     localStorage.setItem(
         "plans",
         JSON.stringify(existingPlans)
     );
-
-    alert("Plan saved successfully!");
 
     form.reset();
 });
