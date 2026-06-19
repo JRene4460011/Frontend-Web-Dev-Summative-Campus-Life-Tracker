@@ -684,6 +684,12 @@ a {
     background: #999;
 }
 
+.highlight {
+    background: #fffa8c;
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
 @media (max-width: 768px) {
     .table-responsive {
         overflow-x: auto;
